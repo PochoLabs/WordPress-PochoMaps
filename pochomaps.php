@@ -50,3 +50,43 @@ function pocho_manager_admin_styles() {
 
 add_action('admin_print_scripts', 'pocho_manager_admin_scripts');
 add_action('admin_print_styles', 'pocho_manager_admin_styles');
+
+// Add back in the registration of pochomaps post-type
+
+function register_pochomaps() {
+	$labels = array(
+		'name' => _x( 'MapPoints', 'map-point'),
+		'singular_name' => _x( 'MapPoint', 'map-point'),
+		'add_new' => _x( 'Add New', 'map-point'),
+		'add_new_item' => _x( 'Add New MapPoint', 'map-point'),
+		'edit_item' => _x( 'Edit MapPoint', 'map-point'),
+		'new_item' => _x( 'New MapPoint', 'map-point'),
+		'view_item' => _x( 'View MapPoint', 'map-point'),
+		'search_items' => _x( 'Search MapPoints', 'map-point'),
+		'not_found' => _x( 'No MapPoints Found', 'map-point'),
+		'not_found_in_trash' => _x( 'No MapPoints found in Trash', 'map-point'),
+		'parent_item_colon' => _x( 'Parent MapPoint:', 'map-point'),
+		'menu_name' => _x( 'MapPoints', 'map-point'),
+	);
+	$args = array(
+		'labels' => $labels,
+		'hierarchical' => false,
+		'description' => 'Map points for PochoMaps',
+		'supports' => array( 'title', 'editor', 'revisions', 'page-attributes'),
+		'taxonomies' => array(),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 3,
+		'menu_icon' => 'dashicons-location',
+		'show_in_nav_menus' => true,
+		'publicly_queryable' => true,
+		'exclude_from_search' => false,
+		'has_archive' => false,
+		'query_var' => true,
+		'rewrite' => true,
+		'capability_type' => 'page'
+	);
+	register_post_type('map-point', $args);
+}
+add_action( 'init', 'register_pochomaps');

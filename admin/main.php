@@ -16,9 +16,10 @@
 
 
 
+
 		<div class="distribution-map">
 
-		<img src="http://www.thedream.us/wp-content/uploads/2016/01/160104-H1N1_USA_Map.png" class="map-image" alt="Map not found">
+		<img src="http://vagrantpress.dev/wp-content/uploads/2016/01/160104-H1N1_USA_Map.png" class="map-image" alt="Map not found">
 
 		<div data-top="62" data-left="21" class="map-point">
 			<div class="content">

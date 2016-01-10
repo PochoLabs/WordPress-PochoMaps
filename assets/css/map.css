@@ -22,40 +22,7 @@
 .middle_inner, #middle, #header, .container {
 	box-sizing: content-box!important
 }
-h1, h2, h3, h4, h5, h6 {
-	margin-bottom: 20px;
-	text-transform: uppercase;
-	font-family: "Roboto Condensed", Helvetica, sans-serif;
-	font-weight: 300
-}
-h1 {
-	font-size: 36pt;
-	text-transform: none
-}
-h2 {
-	font-size: 24pt
-}
-h3 {
-	font-size: 18pt
-}
-h4 {
-	font-size: 16pt
-}
-h5 {
-	font-size: 14pt
-}
-h6 {
-	font-size: 12pt
-}
-p {
-	font-size: 12pt;
-	margin-bottom: 12pt
-}
-strong {
-	font-weight: 900;
-	font-family: "Roboto Condensed", Helvetica, sans-serif;
-	color: #000
-}
+
 a {
 	-webkit-transition: color 0.25s ease-in-out;
 	transition: color 0.25s ease-in-out;
