@@ -15,13 +15,24 @@
 <h2> <b>Upload your Image from here </b></h2>
 <input type="text" name="path" class="image_path" value="<?php echo $img_path; ?>" id="image_path">
 <input type="button" value="Upload Image" class="button-primary" id="upload_image"/> Upload your Image from here.
+<input type="submit" name="submit" class="save_path button-primary" id="submit_button" value="Save Setting">
+<input type="submit" name="remove" value="Remove Image" class="button-secondary" id="remove_image"/>
 
-
-
-<div class="distribution-map" id="show_upload_preview">
+</form>
 
 <?php if(! empty($img_path)){
 ?>
+<br><br>
+<div>
+	<form id="form_id" action="" method="post">
+		<input type="text" name="data-top" value="" placeholder="Percent from Top">
+		<input type="text" name="data-left" value="" placeholder="Percent from Left">
+		<br>
+		<input class="button-primary" type="button" name="add-point" value="Add Map Point">
+	</form>
+</div>
+
+<div class="distribution-map" id="show_upload_preview">
 
 <img src="<?php echo $img_path ; ?>" class="map-image" alt="Map not found">
 
@@ -41,27 +52,10 @@
 </div>
 
 </div>
-<div class="remove-image-button">
-
-<input type="submit" name="remove" value="Remove Image" class="button-secondary" id="remove_image"/>
-
+<br><br>
 
 <?php } ?>
-</div>
-<input type="submit" name="submit" class="save_path button-primary" id="submit_button" value="Save Setting">
 
-</form>
-
-
-<br><hr><br>
-		<div>
-			<form id="form_id" action="" method="post">
-				<input type="text" name="data-top" value="" placeholder="Percent from Top">
-				<input type="text" name="data-left" value="" placeholder="Percent from Left">
-				<br>
-				<input class="button-primary" type="button" name="add-point" value="Add Map Point">
-			</form>
-		</div>
 
 		</div> <!-- /#pocho-main -->
 </div> <!-- /.wrap -->
