@@ -25,8 +25,8 @@
 <br><br>
 <div>
 	<form id="form_id" action="" method="post">
-		<input type="text" name="data-top" value="" placeholder="Percent from Top">
-		<input type="text" name="data-left" value="" placeholder="Percent from Left">
+		<input type="text" name="data-top" id="input-data-top" value="" placeholder="Percent from Top">
+		<input type="text" name="data-left" id="input-data-left" value="" placeholder="Percent from Left">
 		<br>
 		<input class="button-primary" type="button" name="add-point" value="Add Map Point">
 	</form>
@@ -34,7 +34,7 @@
 
 <div class="distribution-map" id="show_upload_preview">
 
-<img src="<?php echo $img_path ; ?>" class="map-image" alt="Map not found">
+<img src="<?php echo $img_path ; ?>" id="preview-image" class="map-image" alt="Map not found">
 
 <div data-top="62" data-left="21" class="map-point">
 	<div class="content">
