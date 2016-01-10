@@ -140,7 +140,7 @@ public function register_pochomaps() {
 		'labels' => $labels,
 		'hierarchical' => false,
 		'description' => 'Map points for PochoMaps',
-		'supports' => array( 'title', 'editor', 'revisions', 'page-attributes'),
+		'supports' => array( 'title', 'editor', 'custom-fields'),
 		'taxonomies' => array(),
 		'public' => true,
 		'show_ui' => true,
@@ -200,22 +200,30 @@ function delete_image() {
 
 // Add a map points
 function add_mappoint() {
-	if(isset($_POST['add'])){
+	if(isset($_POST['addpoint'])){
 		global $wpdb;
 		$data_top = $_POST['data-top'];
 		$data_left = $_POST['data-left'];
 		$point_tile = $_POST['map_point_title'];
 		$point_content = $_POST['mappoint_content'];
 
-		// We need to get the images meta ID.
-		$query = "SELECT ID FROM wp_posts where guid = '" . esc_url($img_path) . "' AND post_type = 'attachment'";
-		$results = $wpdb->get_results($query);
 
-		// And delete it
-		foreach ( $results as $row ) {
-			wp_delete_attachment( $row->ID ); //delete the image and also delete the attachment from the Media Library.
+		$post_id = wp_insert_post(array (
+			'post_type' => 'map-point',
+			'post_title' => $point_tile,
+			'post_content' => $point_content,
+			'post_status' => 'publish',
+			'comment_status' => 'closed',   // if you prefer
+			'ping_status' => 'closed',      // if you prefer
+		));
+
+		if ($post_id) {
+			// insert post meta
+			add_post_meta($post_id, '_data-top', $data_top);
+			add_post_meta($post_id, '_data-left', $data_left);
+
 		}
-		delete_option('pochomaps_map_image'); //delete image path from database.
+
 	}
 }
 

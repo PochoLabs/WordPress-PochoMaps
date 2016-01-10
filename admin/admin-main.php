@@ -13,8 +13,10 @@
 
 <form class="ink_image" method="post" action="#">
 <h2> <b>Upload your Image from here </b></h2>
+
 <input type="text" name="path" class="image_path" value="<?php echo $img_path; ?>" id="image_path">
-<input type="button" value="Upload Image" class="button-primary" id="upload_image"/> Upload your Image from here.
+<input type="button" value="Upload Image" class="button-primary" id="upload_image"/>
+<br><br>
 <input type="submit" name="submit" class="save_path button-primary" id="submit_button" value="Save Setting">
 <input type="submit" name="remove" value="Remove Image" class="button-secondary" id="remove_image"/>
 
@@ -24,7 +26,7 @@
 ?>
 <br><br>
 <div>
-	<form id="form_id" action="#" method="post">
+	<form id="form_id" method="post" action="#">
 		<input type="text" name="data-top" id="input-data-top" value="" placeholder="Percent from Top">
 		<input type="text" name="data-left" id="input-data-left" value="" placeholder="Percent from Left">
 
@@ -37,7 +39,8 @@
 
 
 		<br>
-		<input class="button-primary" type="button" name="add" value="Add Map Point">
+		<input class="button-primary" type="submit" name="addpoint" value="Add Map Point">
+
 		<input id="recheckButton" name="recheck" type="button" class="button-secondary" value="Reset Check Hover">
 	</form>
 </div>
@@ -62,6 +65,10 @@
 		</div>
 	</div>
 </div>
+
+
+
+
 
 </div>
 <br><br>
