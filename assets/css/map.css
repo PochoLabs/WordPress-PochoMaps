@@ -23,17 +23,6 @@
 	box-sizing: content-box!important
 }
 
-a {
-	-webkit-transition: color 0.25s ease-in-out;
-	transition: color 0.25s ease-in-out;
-	font-family: "Roboto Condensed", Helvetica, sans-serif;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #898b9f
-}
-a:visited {
-	color: #898b9f
-}
 li.active a, a:hover, a:active {
 	color: #000
 }

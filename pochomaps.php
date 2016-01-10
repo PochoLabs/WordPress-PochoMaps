@@ -9,15 +9,79 @@
 * License: MIT License
 */
 
+/**
+* Enclosing all our functions in a class
+* because I am a good boy who follows directions.
+*/
 
-// Register the top level admin menu and page
+Class PLABS {
+/* -----------------------------------------------*
+* Attributes
+* -----------------------------------------------*/
 
-function pochomaps_admin_action() {
+private static $instance = null;
 
-	add_menu_page('PochoMaps Admin', 'PochoMaps', 'manage_options', 'pocho-admin', 'pocho_admin');
+ // Saved Options
+public $options;
+
+/* -----------------------------------------------*
+* Constructor
+* -----------------------------------------------*/
+
+/**
+* Creates or returns an instance of this class.
+*
+* @return PLABS_Theme_Options A single instance of this class.
+*/
+public static function get_instance(){
+
+	if (null == self::$instance) {
+		self::$instance = new self;
+	}
+
+	return self::$instance;
 }
 
-function pochomaps_admin_init() {
+// end get_instance
+
+/**
+* Initialize the plugin by setting localization, filters, and administration functions.
+*/
+
+private function __construct(){
+	// Register the top level admin menu and page
+
+	add_action('admin_init', array(&$this, 'pochomaps_admin_init') );
+	add_action('admin_menu', array(&$this, 'pochomaps_admin_page') );
+
+	// This is do add image upload functionality
+	add_action('admin_print_scripts', array(&$this, 'pocho_manager_admin_scripts') );
+	add_action('admin_print_styles', array(&$this, 'pocho_manager_admin_styles') );
+
+	// Add back in the registration of pochomaps post-type
+	add_action( 'init', array(&$this, 'register_pochomaps') );
+
+	// Call Function to store value into database.
+	add_action('init', array(&$this, 'store_in_database'));
+
+	// Call Function to delete image.
+	add_action('init', array(&$this, 'delete_image'));
+
+}
+
+/*********************************************************/
+
+
+/* --------------------------------------------*
+* Functions
+* -------------------------------------------- */
+
+public function pochomaps_admin_page() {
+
+	add_menu_page('PochoMaps Admin', 'PochoMaps', 'manage_options', 'pocho-admin', array(&$this, 'pocho_admin') );
+}
+
+public function pochomaps_admin_init() {
 	wp_register_style( 'PochoStylesheet', plugins_url('assets/css/style.css', __FILE__) );
 	wp_register_script('PochoAdminScript', plugins_url('assets/js/main.js', __FILE__) );
 	// register map scrips and css
@@ -25,16 +89,18 @@ function pochomaps_admin_init() {
 	wp_register_script('MapScript', plugins_url('assets/js/map.js', __FILE__) );
 }
 
-function pocho_admin() {
-	include('pocho_import_admin.php');
+public function pocho_admin() {
+	global $pagenow;
+	if ('media-upload.php' == $pagenow || 'async-upload.php' == $pagenow) {
+		// Now we will replace the 'Insert into Post Button inside Thickbox'
+		add_filter('gettext', array($this, 'replace_window_text'), 1, 2);
+		// gettext filter and every sentence.
+	}
+	include('admin/admin-main.php');
 }
 
-add_action('admin_init', 'pochomaps_admin_init');
-add_action('admin_menu', 'pochomaps_admin_action');
 
-
-// This is do add image upload functionality
-function pocho_manager_admin_scripts() {
+public function pocho_manager_admin_scripts() {
 	wp_enqueue_script('media-upload');
 	wp_enqueue_script('thickbox');
 	wp_enqueue_script('jquery');
@@ -42,18 +108,14 @@ function pocho_manager_admin_scripts() {
 	wp_enqueue_script('MapScript');
 }
 
-function pocho_manager_admin_styles() {
+public function pocho_manager_admin_styles() {
 	wp_enqueue_style('thickbox');
 	wp_enqueue_style('PochoStylesheet');
 	wp_enqueue_style('MapStylesheet');
 }
 
-add_action('admin_print_scripts', 'pocho_manager_admin_scripts');
-add_action('admin_print_styles', 'pocho_manager_admin_styles');
 
-// Add back in the registration of pochomaps post-type
-
-function register_pochomaps() {
+public function register_pochomaps() {
 	$labels = array(
 		'name' => _x( 'MapPoints', 'map-point'),
 		'singular_name' => _x( 'MapPoint', 'map-point'),
@@ -89,4 +151,49 @@ function register_pochomaps() {
 	);
 	register_post_type('map-point', $args);
 }
-add_action( 'init', 'register_pochomaps');
+
+
+/*
+* Referer parameter in our script file is for to know from which page we are launching the Media Uploader as we want to change the text "Insert into Post".
+*/
+function replace_window_text($translated_text, $text) {
+if ('Insert into Post' == $text) {
+$referer = strpos(wp_get_referer(), 'media_page');
+if ($referer != '') {
+return __('Upload Image', 'ink');
+}
+}
+return $translated_text;
+}
+
+// This function stores the option in the database
+public function store_in_database(){
+	if(isset($_POST['submit'])){
+		$image_path = $_POST['path'];
+		update_option('pochomaps_map_image', $image_path);
+	}
+}
+
+// Below Function will delete image.
+function delete_image() {
+	if(isset($_POST['remove'])){
+		global $wpdb;
+		$img_path = $_POST['path'];
+
+		// We need to get the images meta ID.
+		$query = "SELECT ID FROM wp_posts where guid = '" . esc_url($img_path) . "' AND post_type = 'attachment'";
+		$results = $wpdb->get_results($query);
+
+		// And delete it
+		foreach ( $results as $row ) {
+			wp_delete_attachment( $row->ID ); //delete the image and also delete the attachment from the Media Library.
+		}
+		delete_option('pochomaps_map_image'); //delete image path from database.
+	}
+}
+
+
+
+} // End PLABS class constructor
+
+PLABS::get_instance();

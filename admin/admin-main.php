@@ -6,20 +6,44 @@
 	<div id="pocho-main">
 		<h1>PochoMaps Admin</h1>
 
-		<label for="upload_image">
-			<input id="upload_image" type="text" size="36" name="upload_image" value="" />
-			<input id="upload_image_button" type="button" value="Upload Image" />
-			<br />Enter an URL or upload an image of your map.
-		</label>
+		<?php
+		global $wpdb;
+		$img_path = get_option('pochomaps_map_image');
+?>
+
+<form class="ink_image" method="post" action="#">
+<h2> <b>Upload your Image from here </b></h2>
+<input type="text" name="path" class="image_path" value="<?php echo $img_path; ?>" id="image_path">
+<input type="button" value="Upload Image" class="button-primary" id="upload_image"/> Upload your Image from here.
+<div id="show_upload_preview">
+
+<?php if(! empty($img_path)){
+?>
+<img src="<?php echo $img_path ; ?>">
+<input type="submit" name="remove" value="Remove Image" class="button-secondary" id="remove_image"/>
+<?php } ?>
+</div>
+<input type="submit" name="submit" class="save_path button-primary" id="submit_button" value="Save Setting">
+
+</form>
 
 
+<br><hr><br>
+		<div>
+			<form id="form_id" action="" method="post">
+				<input type="text" name="data-top" value="" placeholder="Percent from Top">
+				<input type="text" name="data-left" value="" placeholder="Percent from Left">
+				<br>
+				<input type="button" name="add-point" value="Add Map Point">
+			</form>
+		</div>
 
 
 
 
 		<div class="distribution-map">
 
-		<img src="http://vagrantpress.dev/wp-content/uploads/2016/01/160104-H1N1_USA_Map.png" class="map-image" alt="Map not found">
+		<img src="<?php echo $img_path ; ?>" class="map-image" alt="Map not found">
 
 		<div data-top="62" data-left="21" class="map-point">
 			<div class="content">
@@ -35,7 +59,8 @@
 				</div>
 			</div>
 		</div>
-		<div data-top="45" data-left="8" class="map-point">
+
+		<!-- <div data-top="45" data-left="8" class="map-point">
 			<div class="content">
 				<div class="centered-y">
 					<h2>California</h2>
@@ -184,7 +209,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 
 		</div> <!-- /#pocho-main -->
