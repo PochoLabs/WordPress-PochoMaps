@@ -67,6 +67,8 @@ private function __construct(){
 	// Call Function to delete image.
 	add_action('init', array(&$this, 'delete_image'));
 
+	// Call function to add map point
+	add_action('init', array(&$this, 'add_mappoint'));
 }
 
 /*********************************************************/
@@ -179,6 +181,27 @@ function delete_image() {
 	if(isset($_POST['remove'])){
 		global $wpdb;
 		$img_path = $_POST['path'];
+
+		// We need to get the images meta ID.
+		$query = "SELECT ID FROM wp_posts where guid = '" . esc_url($img_path) . "' AND post_type = 'attachment'";
+		$results = $wpdb->get_results($query);
+
+		// And delete it
+		foreach ( $results as $row ) {
+			wp_delete_attachment( $row->ID ); //delete the image and also delete the attachment from the Media Library.
+		}
+		delete_option('pochomaps_map_image'); //delete image path from database.
+	}
+}
+
+// Add a map points
+function add_mappoint() {
+	if(isset($_POST['add'])){
+		global $wpdb;
+		$data_top = $_POST['data-top'];
+		$data_left = $_POST['data-left'];
+		$point_tile = $_POST['map_point_title'];
+		$point_content = $_POST['mappoint_content'];
 
 		// We need to get the images meta ID.
 		$query = "SELECT ID FROM wp_posts where guid = '" . esc_url($img_path) . "' AND post_type = 'attachment'";

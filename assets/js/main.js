@@ -13,14 +13,17 @@ jQuery(document).ready(function() {
 
 	// Detect hover position over map and populate appropriate data fields
 	jQuery('#preview-image').mousemove(function(e){
-		var offset = jQuery(this).offset();
-		var imgWidth = jQuery(this).width();
-		var imgHeight = jQuery(this).height();
-	  var relativeX = ( 100 - ((((e.pageX - offset.left) - imgWidth) / imgWidth) * -100) );
-	  var relativeY = (100 - ((((e.pageY - offset.top) - imgHeight) / imgHeight) * -100) );
+		if(jQuery(this).keydown()){
+			var offset = jQuery(this).offset();
+			var imgWidth = jQuery(this).width();
+			var imgHeight = jQuery(this).height();
+		  var relativeX = ( 100 - ((((e.pageX - offset.left) - imgWidth) / imgWidth) * -100) );
+		  var relativeY = (100 - ((((e.pageY - offset.top) - imgHeight) / imgHeight) * -100) );
 
-		jQuery('#input-data-top').val(relativeY);
-		jQuery('#input-data-left').val(relativeX);
+			jQuery('#input-data-top').val(relativeY);
+			jQuery('#input-data-left').val(relativeX);
+		}
+
 
 
 	});

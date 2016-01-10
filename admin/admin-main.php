@@ -24,11 +24,20 @@
 ?>
 <br><br>
 <div>
-	<form id="form_id" action="" method="post">
+	<form id="form_id" action="#" method="post">
 		<input type="text" name="data-top" id="input-data-top" value="" placeholder="Percent from Top">
 		<input type="text" name="data-left" id="input-data-left" value="" placeholder="Percent from Left">
+
 		<br>
-		<input class="button-primary" type="button" name="add-point" value="Add Map Point">
+
+		<input type="text" name="map_point_title" value="" placeholder="Title">
+
+		<br>
+		<textarea name="mappoint_content" class="mappoint_content" rows="4" cols="100" placeholder="Your Map Point's content here."></textarea>
+
+
+		<br>
+		<input class="button-primary" type="button" name="add" value="Add Map Point">
 	</form>
 </div>
 
