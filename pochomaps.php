@@ -89,6 +89,9 @@ public function pochomaps_admin_init() {
 	// register map scrips and css
 	wp_register_style( 'MapStylesheet', plugins_url('assets/css/map.css', __FILE__) );
 	wp_register_script('MapScript', plugins_url('assets/js/map.js', __FILE__) );
+
+	// Register jquery plugin for admin page
+	wp_register_script('pressAndHold', plugins_url('assets/js/jquery.pressAndHold.min.js', __FILE__) );
 }
 
 public function pocho_admin() {
@@ -106,6 +109,7 @@ public function pocho_manager_admin_scripts() {
 	wp_enqueue_script('media-upload');
 	wp_enqueue_script('thickbox');
 	wp_enqueue_script('jquery');
+	wp_enqueue_script('pressAndHold');
 	wp_enqueue_script('PochoAdminScript');
 	wp_enqueue_script('MapScript');
 }

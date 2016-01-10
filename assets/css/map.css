@@ -9,7 +9,7 @@
 	overflow-x: hidden
 }
 .description {
-	max-width: 600px;
+	/*max-width: 600px;*/
 	margin: 0 auto;
 	color: rgba(0, 0, 0, 0.7);
 	text-align: left;

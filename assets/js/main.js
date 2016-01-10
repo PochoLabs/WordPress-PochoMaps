@@ -12,8 +12,10 @@ jQuery(document).ready(function() {
 	};
 
 	// Detect hover position over map and populate appropriate data fields
+	var checkHover = true;
+
 	jQuery('#preview-image').mousemove(function(e){
-		if(jQuery(this).keydown()){
+		if(jQuery(this).attr('data-checking') === 'true'){
 			var offset = jQuery(this).offset();
 			var imgWidth = jQuery(this).width();
 			var imgHeight = jQuery(this).height();
@@ -24,8 +26,26 @@ jQuery(document).ready(function() {
 			jQuery('#input-data-left').val(relativeX);
 		}
 
+	});
 
+	jQuery('#preview-image-wrap').pressAndHold({
+		holdTime: 1000,
+		progressIndicatorRemoveDelay: 900,
+		progressIndicatorColor: "#ceb",
+		progressIndicatorOpacity: 0.5
+	});
 
+	// jQuery('#preview-image-wrap').on('start.pressAndHold', function(event) {
+	// 	console.log('clicking');
+	// });
+
+	jQuery('#preview-image-wrap').on('complete.pressAndHold', function(event) {
+		jQuery('#preview-image').attr('data-checking', 'false');
+	});
+
+	jQuery('#recheckButton').click(function(e){
+		e.preventDefault();
+		jQuery('#preview-image').attr('data-checking', 'true');
 	});
 
 });

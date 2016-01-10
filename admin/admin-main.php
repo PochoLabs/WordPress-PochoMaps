@@ -38,12 +38,15 @@
 
 		<br>
 		<input class="button-primary" type="button" name="add" value="Add Map Point">
+		<input id="recheckButton" name="recheck" type="button" class="button-secondary" value="Reset Check Hover">
 	</form>
 </div>
 
 <div class="distribution-map" id="show_upload_preview">
 
-<img src="<?php echo $img_path ; ?>" id="preview-image" class="map-image" alt="Map not found">
+<div id="preview-image-wrap">
+	<img src="<?php echo $img_path ; ?>" data-checking="true" id="preview-image" class="map-image" alt="Map not found">
+</div>
 
 <div data-top="62" data-left="21" class="map-point">
 	<div class="content">
