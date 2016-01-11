@@ -49,6 +49,8 @@ public static function get_instance(){
 */
 
 private function __construct(){
+	// Add back in the registration of pochomaps post-type
+	add_action( 'init', array(&$this, 'register_pochomaps') );
 	// Register the top level admin menu and page
 
 	add_action('admin_init', array(&$this, 'pochomaps_admin_init') );
@@ -57,9 +59,6 @@ private function __construct(){
 	// This is do add image upload functionality
 	add_action('admin_print_scripts', array(&$this, 'pocho_manager_admin_scripts') );
 	add_action('admin_print_styles', array(&$this, 'pocho_manager_admin_styles') );
-
-	// Add back in the registration of pochomaps post-type
-	add_action( 'init', array(&$this, 'register_pochomaps') );
 
 	// Call Function to store value into database.
 	add_action('init', array(&$this, 'store_in_database'));
@@ -80,7 +79,10 @@ private function __construct(){
 
 public function pochomaps_admin_page() {
 
-	add_menu_page('PochoMaps Admin', 'PochoMaps', 'manage_options', 'pocho-admin', array(&$this, 'pocho_admin') );
+	// add_menu_page('PochoMaps Admin', 'PochoMaps', 'manage_options', 'pocho-admin', array(&$this, 'pocho_admin') );
+
+	add_submenu_page( 'edit.php?post_type=map-point', 'The Map Points', 'Map Settings', 'publish_posts', 'map-point', array(&$this, 'pocho_admin'));
+
 }
 
 public function pochomaps_admin_init() {
@@ -101,7 +103,16 @@ public function pocho_admin() {
 		add_filter('gettext', array($this, 'replace_window_text'), 1, 2);
 		// gettext filter and every sentence.
 	}
+
 	include('admin/admin-main.php');
+}
+
+public function pocho_map_points_redirect() {
+	// wp_redirect( (home_url() . 'edit.php?post_type=map-point'), 302);
+	// exit;
+	?>
+	<h1>Testing</h1>
+	<?php
 }
 
 
@@ -134,7 +145,7 @@ public function register_pochomaps() {
 		'not_found' => _x( 'No MapPoints Found', 'map-point'),
 		'not_found_in_trash' => _x( 'No MapPoints found in Trash', 'map-point'),
 		'parent_item_colon' => _x( 'Parent MapPoint:', 'map-point'),
-		'menu_name' => _x( 'MapPoints', 'map-point'),
+		'menu_name' => _x( 'MapPoints', 'map-points'),
 	);
 	$args = array(
 		'labels' => $labels,
@@ -145,7 +156,7 @@ public function register_pochomaps() {
 		'public' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
-		'menu_position' => 3,
+		'menu_position' => 100,
 		'menu_icon' => 'dashicons-location',
 		'show_in_nav_menus' => true,
 		'publicly_queryable' => true,
