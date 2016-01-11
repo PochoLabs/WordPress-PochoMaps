@@ -367,12 +367,7 @@ class Smashing_Updater {
 	  $this->authorize_token = $token;
 	}
 
-	// Include our updater file
-	include_once( plugin_dir_path( __FILE__ ) . 'update.php');
-
-	$updater = new Smashing_Updater( __FILE__ ); // instantiate our class
-	$updater->set_username( 'PochoLabs' ); // set username
-	$updater->set_repository( 'WordPress-PochoMaps' ); // set repo
+	
 
 	private function get_repository_info() {
 	  if ( is_null( $this->github_response ) ) { // Do we have a response?
