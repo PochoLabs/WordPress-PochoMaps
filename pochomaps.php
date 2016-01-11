@@ -3,7 +3,7 @@
 * Plugin Name: PochoMaps
 * Plugin URI: http://pocholabs.github.io
 * Description: A lightweight customizable map plugin with CSS animations. Choose your own image as a map and create custom map pointers which fully customizable text. Mobile Responsive.
-* Version: 0.8.4
+* Version: 0.8.5
 * Author: Celso Mireles
 * Author URI: http://digitalstrategy.tips
 * License: MIT License
