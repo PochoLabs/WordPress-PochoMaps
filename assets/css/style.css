@@ -13,3 +13,7 @@
 	padding-top: 20px!important;
 
 }
+
+#preview-image-wrap > img{
+	width: 100%;
+}

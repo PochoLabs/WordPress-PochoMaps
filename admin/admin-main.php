@@ -26,7 +26,7 @@
 ?>
 <br><br>
 <div>
-	<form id="form_id" method="post" action="#">
+	<form id="add-point" method="post" action="#">
 		<input type="text" name="data-top" id="input-data-top" value="" placeholder="Percent from Top">
 		<input type="text" name="data-left" id="input-data-left" value="" placeholder="Percent from Left">
 
@@ -51,7 +51,7 @@
 	<img src="<?php echo $img_path ; ?>" data-checking="true" id="preview-image" class="map-image" alt="Map not found">
 </div>
 
-<div data-top="62" data-left="21" class="map-point">
+<!-- <div data-top="62" data-left="21" class="map-point">
 	<div class="content">
 		<div class="centered-y">
 			<h2>Arizona</h2>
@@ -64,9 +64,32 @@
 			<p><a href="http://www.southmountaincc.edu/" target="_blank" class="two-year">  - South Mountain</a></p>
 		</div>
 	</div>
-</div>
+</div> -->
+
+<?php
+	$args = array('post_type' => 'map-point');
+	$query = new WP_Query($args);
+
+	while( $query -> have_posts() ) : $query -> the_post();
+
+	$custom_fields = get_post_custom( get_the_ID() );
+	$dtop = $custom_fields['_data-top'];
+	$dleft = $custom_fields['_data-left'];
+
+	?>
+
+	<div data-top="<?php echo $dtop[0]; ?>" data-left="<?php echo $dleft[0]; ?>" class="map-point">
+		<div class="content">
+			<div class="centered-y">
+				<h2><?php echo the_title(); ?></h2>
+
+				<?php echo the_content(); ?>
+			</div>
+		</div>
+	</div>
 
 
+	<?php endwhile; ?>
 
 
 

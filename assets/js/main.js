@@ -48,4 +48,18 @@ jQuery(document).ready(function() {
 		jQuery('#preview-image').attr('data-checking', 'true');
 	});
 
+	// Validate add mappoint form
+	jQuery('#add-point').submit(function(e){
+		var dtop = e.target.data-top.value;
+		var dleft = e.target.data-left.value;
+		var title = e.target.map_point_title.value;
+		var content = e.target.mappoint_content.value;
+		var somethingIsBlank = false;
+
+		if(dtop.length === 0 || dleft.length === 0 || title.length === 0 || content.length === 0){
+			e.preventDefault();
+			alert('Something Is Blank');
+		}
+	});
+
 });
