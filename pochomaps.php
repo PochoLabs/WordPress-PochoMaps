@@ -68,6 +68,8 @@ private function __construct(){
 
 	// Call function to add map point
 	add_action('init', array(&$this, 'add_mappoint'));
+
+
 }
 
 /*********************************************************/
@@ -78,8 +80,6 @@ private function __construct(){
 * -------------------------------------------- */
 
 public function pochomaps_admin_page() {
-
-	// add_menu_page('PochoMaps Admin', 'PochoMaps', 'manage_options', 'pocho-admin', array(&$this, 'pocho_admin') );
 
 	add_submenu_page( 'edit.php?post_type=map-point', 'The Map Points', 'Map Settings', 'publish_posts', 'map-point', array(&$this, 'pocho_admin'));
 
@@ -105,14 +105,6 @@ public function pocho_admin() {
 	}
 
 	include('admin/admin-main.php');
-}
-
-public function pocho_map_points_redirect() {
-	// wp_redirect( (home_url() . 'edit.php?post_type=map-point'), 302);
-	// exit;
-	?>
-	<h1>Testing</h1>
-	<?php
 }
 
 
@@ -243,3 +235,13 @@ function add_mappoint() {
 } // End PLABS class constructor
 
 PLABS::get_instance();
+
+
+function pocho_shortcode (){
+	ob_start();
+	?><h1>This is a shortcode right here.</h1>
+	<?php
+	 return ob_get_clean();
+
+}
+add_shortcode('pochomap', 'pocho_shortcode');
