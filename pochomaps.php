@@ -193,6 +193,7 @@ public function register_pochomaps() {
 /*
 * Referer parameter in our script file is for to know from which page we are launching the Media Uploader as we want to change the text "Insert into Post".
 */
+
 function replace_window_text($translated_text, $text) {
 if ('Insert into Post' == $text) {
 $referer = strpos(wp_get_referer(), 'media_page');
@@ -257,8 +258,6 @@ function add_mappoint() {
 
 	}
 }
-
-
 
 } // End PLABS class constructor
 
@@ -367,7 +366,7 @@ class Smashing_Updater {
 	  $this->authorize_token = $token;
 	}
 
-	
+
 
 	private function get_repository_info() {
 	  if ( is_null( $this->github_response ) ) { // Do we have a response?
