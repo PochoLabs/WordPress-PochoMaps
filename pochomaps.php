@@ -69,10 +69,24 @@ private function __construct(){
 	// Call function to add map point
 	add_action('init', array(&$this, 'add_mappoint'));
 
+	// ----------------------------------
+	//
+	// Now register scripts for front end
+	//
+	// ----------------------------------
+
+	// add_action('init', array(&$this, 'pochomaps_frontend_init'));
+	// add_action( 'wp_enqueue_scripts', array(&$this,'pm_frontend_scripts') );
+	// add_action( 'wp_enqueue_style', array(&$this,'pm_frontend_sty') );
+
 
 }
 
 /*********************************************************/
+
+
+
+
 
 
 /* --------------------------------------------*
@@ -95,6 +109,20 @@ public function pochomaps_admin_init() {
 	// Register jquery plugin for admin page
 	wp_register_script('pressAndHold', plugins_url('assets/js/jquery.pressAndHold.min.js', __FILE__) );
 }
+
+// public function pochomaps_frontend_init() {
+// 	wp_register_style( 'frontMapStylesheet', plugins_url('assets/css/map.css', __FILE__) );
+// 	wp_register_script('frontMapScript', plugins_url('assets/js/map.js', __FILE__) );
+// }
+//
+// public function pm_frontend_scripts() {
+// 	wp_enqueue_script('jquery');
+// 	wp_enqueue_script('frontMapStylesheet');
+// }
+//
+// public function pm_frontend_styles() {
+// 	wp_enqueue_style('frontMapStylesheet');
+// }
 
 public function pocho_admin() {
 	global $pagenow;
@@ -239,9 +267,67 @@ PLABS::get_instance();
 
 function pocho_shortcode (){
 	ob_start();
-	?><h1>This is a shortcode right here.</h1>
+	global $wpdb;
+	$img_path = get_option('pochomaps_map_image');
+	?>
+	<div class="distribution-map" id="show_upload_preview">
+
+	<div id="preview-image-wrap">
+		<img src="<?php echo $img_path ; ?>" data-checking="true" id="preview-image" class="map-image" alt="Map not found">
+	</div>
+
 	<?php
+		$args = array('post_type' => 'map-point');
+		$query = new WP_Query($args);
+
+		while( $query -> have_posts() ) : $query -> the_post();
+
+		$custom_fields = get_post_custom( get_the_ID() );
+		$dtop = $custom_fields['_data-top'];
+		$dleft = $custom_fields['_data-left'];
+
+		?>
+
+		<div data-top="<?php echo $dtop[0]; ?>" data-left="<?php echo $dleft[0]; ?>" class="map-point">
+			<div class="content">
+				<div class="centered-y">
+					<h2><?php echo the_title(); ?></h2>
+
+					<?php echo the_content(); ?>
+				</div>
+			</div>
+		</div>
+
+
+		<?php endwhile; ?>
+
+
+
+	</div>
+	<?php include('templates/map.php');
 	 return ob_get_clean();
 
 }
 add_shortcode('pochomap', 'pocho_shortcode');
+
+
+
+
+function pochomaps_frontend_init() {
+	wp_register_style( 'frontMapStylesheet', plugins_url('assets/css/map.css', __FILE__) );
+	wp_register_script('frontMapScript', plugins_url('assets/js/map.js', __FILE__) );
+}
+
+function pm_frontend_scripts() {
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('frontMapScript');
+}
+
+function pm_frontend_styles() {
+	wp_enqueue_style('frontMapStylesheet');
+}
+
+
+add_action('init', 'pochomaps_frontend_init');
+add_action( 'init', 'pm_frontend_scripts' );
+add_action( 'init', 'pm_frontend_styles' );

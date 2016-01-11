@@ -177,7 +177,7 @@ li.active a, a:hover, a:active {
 	display: none;
 	text-align: left
 }
-@media all and (max-width:767px) {
+/*@media all and (max-width:767px) {
 	#mobile-view {
 		display: block
 	}
@@ -239,4 +239,4 @@ li.active a, a:hover, a:active {
 		clear: both;
 		text-align: left
 	}
-}
+}*/

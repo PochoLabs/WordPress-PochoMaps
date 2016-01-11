@@ -51,21 +51,6 @@
 	<img src="<?php echo $img_path ; ?>" data-checking="true" id="preview-image" class="map-image" alt="Map not found">
 </div>
 
-<!-- <div data-top="62" data-left="21" class="map-point">
-	<div class="content">
-		<div class="centered-y">
-			<h2>Arizona</h2>
-			<p><a href="http://www.asu.edu/" target="_blank">Arizona State University (All Campuses)</a></p>
-			<p><a href="https://asuonline.asu.edu/online-degree-programs" target="_blank">Arizona State University Online (Scholar must live in AZ)</a></p>
-			<p><a href="https://asuonline.asu.edu/online-degree-programs" target="_blank">Arizona State University Online (CCG only, Starbucks Program)</a></p>
-			<h5 class="two-year">Maricopa Community Colleges</h5>
-			<p><a href="http://www.phoenixcollege.edu/" target="_blank" class="two-year">  - Phoenix</a></p>
-			<p><a href="http://www.gatewaycc.edu/" target="_blank" class="two-year">  - GateWay</a></p>
-			<p><a href="http://www.southmountaincc.edu/" target="_blank" class="two-year">  - South Mountain</a></p>
-		</div>
-	</div>
-</div> -->
-
 <?php
 	$args = array('post_type' => 'map-point');
 	$query = new WP_Query($args);
