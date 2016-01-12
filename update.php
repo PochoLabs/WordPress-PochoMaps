@@ -90,7 +90,7 @@ class Pocho_Updater {
         'name'              => $this->plugin["Name"],
         'slug'              => $this->basename,
         'version'           => $this->github_response['tag_name'],
-        'author'            => $this->plugin["AuthorName"],
+        'author'            => $this->plugin["Author"],
         'author_profile'    => $this->plugin["AuthorURI"],
         'last_updated'      => $this->github_response['published_at'],
         'homepage'          => $this->plugin["PluginURI"],
