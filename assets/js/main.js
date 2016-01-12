@@ -31,8 +31,8 @@ jQuery(document).ready(function() {
 	jQuery('#preview-image-wrap').pressAndHold({
 		holdTime: 1000,
 		progressIndicatorRemoveDelay: 900,
-		progressIndicatorColor: "#ceb",
-		progressIndicatorOpacity: 0.5
+		progressIndicatorColor: "#4aac19",
+		progressIndicatorOpacity: 1
 	});
 
 	// jQuery('#preview-image-wrap').on('start.pressAndHold', function(event) {
@@ -41,11 +41,23 @@ jQuery(document).ready(function() {
 
 	jQuery('#preview-image-wrap').on('complete.pressAndHold', function(event) {
 		jQuery('#preview-image').attr('data-checking', 'false');
+
+
+		var topCoord = jQuery('#input-data-top').val();
+		var leftCoord = jQuery('#input-data-left').val();
+
+		var theDiv = '<div style="top:' + topCoord + '%;left:' + leftCoord + '%;" class="map-point temp"><div class="content"><div class="centered-y"></div></div></div>';
+
+		console.log(topCoord);
+		jQuery('#show_upload_preview').append(theDiv);
+
 	});
 
 	jQuery('#recheckButton').click(function(e){
 		e.preventDefault();
 		jQuery('#preview-image').attr('data-checking', 'true');
+
+		jQuery('.map-point.temp').remove();
 	});
 
 	// Validate add mappoint form
