@@ -8,7 +8,8 @@
 
 		<?php
 		global $wpdb;
-		$img_path = get_option('pochomaps_map_image');
+		$default_img = plugins_url('../assets/img/sample.png', __FILE__);
+		$img_path = get_option('pochomaps_map_image', $default_img);
 ?>
 
 <form class="ink_image" method="post" action="#">
