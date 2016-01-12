@@ -1,7 +1,23 @@
+.wrap{
+	width: 100%;
+
+}
+
+.input-field{
+	width:100%;
+	border-radius: 5px;
+	border: 3px solid #ccc!important;
+	padding: 7px;
+	margin: 3px auto;
+}
+
 #pocho-main{
-	background-color: #fff;
+	float: left;
 	padding: 0px;
-	margin: 30px 0px 20px!important;
+	margin: 15px 0px 20px!important;
+	height: 100%;
+	background-color: #fff;
+	width: 90%!important;
 }
 
 #pocho-main > h1 {
@@ -21,11 +37,17 @@
 	padding-left: 0px;
 	padding-right: 0px;
 	padding-bottom: 0px;
-
+	position: relative;
+	top: 25%;
+	-moz-transform: translateY(25%);
+	-webkit-transform: translateY(25%);
+	-o-transform: translateY(25%);
+	transform: translateY(25%);
 }
 
-.distribution-map, .distribution-map > img{
-	margin: 0!important;
+.distribution-map{
+	/*height: 100%;*/
+	min-height: 400px;
 }
 
 #preview-image{
@@ -34,5 +56,28 @@
 
 #preview-image-wrap > img{
 	width: 100%;
+	height: auto;
+}
+
+.col-6{
+	padding: 0;
+	margin: 0;
+	width: 50%!important;
+	float: left;
+	display: inline-block;
 	height: 100%;
+}
+
+@media all and (max-width: 767px){
+	.col-6{
+		width: 100%!important;
+		display: block;
+	}
+	#preview-image-wrap{
+		top: 0;
+		-moz-transform: translateY(0);
+		-webkit-transform: translateY(0);
+		-o-transform: translateY(0);
+		transform: translateY(0);
+	}
 }

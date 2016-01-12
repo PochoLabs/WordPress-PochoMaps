@@ -267,7 +267,8 @@ PLABS::get_instance();
 function pocho_shortcode (){
 	ob_start();
 	global $wpdb;
-	$img_path = get_option('pochomaps_map_image');
+	$default_img = plugins_url('/assets/img/sample.png', __FILE__);
+	$img_path = get_option('pochomaps_map_image', $default_img);
 	?>
 	<div class="distribution-map" id="show_upload_preview">
 

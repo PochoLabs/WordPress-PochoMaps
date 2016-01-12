@@ -19,11 +19,19 @@ jQuery(document).ready(function() {
 			var offset = jQuery(this).offset();
 			var imgWidth = jQuery(this).width();
 			var imgHeight = jQuery(this).height();
-		  var relativeX = ( 100 - ((((e.pageX - offset.left) - imgWidth) / imgWidth) * -100) );
-		  var relativeY = (100 - ((((e.pageY - offset.top) - imgHeight) / imgHeight) * -100) );
 
-			jQuery('#input-data-top').val(relativeY);
-			jQuery('#input-data-left').val(relativeX);
+			var posLeft = ((e.pageX - offset.left) > 0) ? (e.pageX - offset.left) : 0;
+			var posTop = ((e.pageY - offset.top) > 0 ) ? (e.pageY - offset.top) : 0;
+
+		  var relativeX = (  (( (  (posLeft) ) / imgWidth) * 100) );
+			var relativeX2 = (relativeX > 100) ? 100 : relativeX;
+
+		  var relativeY = (  (( (  (posTop)  ) / imgHeight) * 100) );
+			var relativeY2 = (relativeY > 100) ? 100 : relativeY;
+
+
+			jQuery('#input-data-top').val(parseFloat(relativeY2).toFixed(2));
+			jQuery('#input-data-left').val(parseFloat(relativeX2).toFixed(2));
 		}
 
 	});
@@ -49,7 +57,7 @@ jQuery(document).ready(function() {
 		var theDiv = '<div style="top:' + topCoord + '%;left:' + leftCoord + '%;" class="map-point temp"><div class="content"><div class="centered-y"></div></div></div>';
 
 		console.log(topCoord);
-		jQuery('#show_upload_preview').append(theDiv);
+		jQuery('#preview-image-wrap').append(theDiv);
 
 	});
 
