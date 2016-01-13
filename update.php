@@ -83,14 +83,20 @@ class Pocho_Updater {
 
 	public function plugin_popup( $result, $action, $args ) {
   if( ! empty( $args->slug ) ) { // If there is a slug
-    if( $args->slug == $this->basename ) { // And it's our slug
+    if( $args->slug == $this->plugin['Name'] ) { // And it's our slug
       $this->get_repository_info(); // Get our repo info
       // Set it to an array
       $plugin = array(
         'name'              => $this->plugin["Name"],
         'slug'              => $this->basename,
+				'requires'					=> '3.3',
+				'tested'						=> '4.4.1',
+				'rating'						=> '100.0',
+				'num_ratings'				=> '10823',
+				'downloaded'				=> '14249',
+				'added'							=> '2016-01-05',
         'version'           => $this->github_response['tag_name'],
-        'author'            => $this->plugin["Author"],
+        'author'            => $this->plugin["AuthorName"],
         'author_profile'    => $this->plugin["AuthorURI"],
         'last_updated'      => $this->github_response['published_at'],
         'homepage'          => $this->plugin["PluginURI"],
