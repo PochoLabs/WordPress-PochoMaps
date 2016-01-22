@@ -18,13 +18,15 @@ You can also use this to add interest points to any graphic and make it interact
 
 == Installation ==
 
-To install the plugin, either install it via the WordPress.org plugins directory, or download and manually upload in your WordPress admin backend.
+To install the plugin download and manually upload in your WordPress admin backend. You can download v0.8.8 at https://github.com/PochoLabs/WordPress-PochoMaps/archive/0.8.8.zip
 
 e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Download the zip archive to your computer
+2. Log in to Wordpress at [your_domain]/wp-admin
+3. Upload plugin by going to Plugins > Add New > Upload Plugin
+3. Activate the plugin through the 'Plugins' menu in WordPress
+4. Place `[pochomap]` in your pages where you want the map to show up
 
 == Frequently Asked Questions ==
 
