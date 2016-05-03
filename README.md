@@ -24,6 +24,10 @@ Most file types that WordPress supports, should work. PNGs are preferred.
 
 Working on that for a later release.
 
+#### How do I keep this plugin updated?
+
+Coming soon...
+
 ## Screenshots
 
 #### Default Admin pages

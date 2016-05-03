@@ -1,6 +1,6 @@
 === PochoMaps ===
 Contributors: celsom3
-Donate link: http://celsomireles.com
+Donate link: https://cash.me/$celsom3
 Tags: map, interactive, graphic
 Requires at least: 3.0.1
 Tested up to: 3.4
